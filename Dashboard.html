@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack Pro</title>
+
+    <link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+  rel="stylesheet"
+/>
+    <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f7f8fa;
+    color:#111827;
+}
+
+/* sidebar */
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    background:#fff;
+    border-right:1px solid #e2e5e9;
+    padding:20px 18px 16px;
+    display:flex;
+    flex-direction:column;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.brand-logo{
+    width:25px;
+    height:25px;
+}
+
+.brand h2{
+    font-size:17px;
+    line-height:18px;
+}
+
+.brand p{
+    font-size:10px;
+    color:#64748b;
+    margin-top:3px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.nav button{
+    width:100%;
+    height:40px;
+    border:none;
+    border-radius:7px;
+    background:transparent;
+    padding:0 13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#475569;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.nav button.active{
+    background:#dbeafe;
+    color:#1247ad;
+}
+
+.nav-icon{
+    width:16px;
+    height:16px;
+}
+
+.add-btn{
+    width:100%;
+    height:42px;
+    margin-top:auto;
+    border:none;
+    border-radius:7px;
+    background:#000;
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* right side */
+
+.page{
+    margin-left:220px;
+    min-height:100vh;
+}
+
+/* topbar */
+
+.topbar{
+    height:56px;
+    background:#fff;
+    border-bottom:1px solid #e2e5e9;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:0 28px;
+}
+
+.top-user{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+#usernameDisplay{
+    padding-left:18px;
+    border-left:1px solid #e5e7eb;
+    font-size:13px;
+    font-weight:600;
+}
+
+.logout-btn{
+    width:94px;
+    height:33px;
+    border:1px solid #d1d5db;
+    border-radius:6px;
+    background:#fff;
+    color:#111;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* main */
+
+.main{
+    padding:22px 26px 25px;
+}
+
+.heading{
+    margin-bottom:18px;
+}
+
+.heading h1{
+    font-size:24px;
+    line-height:27px;
+}
+
+.heading p{
+    margin-top:3px;
+    color:#475569;
+    font-size:12px;
+}
+
+/* top cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:18px;
+}
+
+.card{
+    height:122px;
+    background:#fff;
+    border:1px solid #dde2e7;
+    border-radius:10px;
+    padding:16px 17px;
+}
+
+.card-icon{
+    width:34px;
+    height:34px;
+    border-radius:7px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:11px;
+}
+
+.card-icon svg{
+    width:17px;
+    height:17px;
+}
+
+.blue{
+    background:#dbeafe;
+    color:#1549b8;
+}
+
+.green{
+    background:#d9f9e5;
+    color:#08752d;
+}
+
+.red{
+    background:#fee2e2;
+    color:#a60000;
+}
+
+.card p{
+    color:#475569;
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.card h2{
+    font-size:21px;
+    line-height:23px;
+}
+
+#totalIncome{
+    color:#08752d;
+}
+
+#totalExpense{
+    color:#b20d0d;
+}
+
+/* cash flow + preferences */
+
+.middle{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:18px;
+    align-items:start;
+    margin-bottom:18px;
+}
+
+.chart-card{
+    height:270px;
+    background:#fff;
+    border:1px solid #dde2e7;
+    border-radius:10px;
+    padding:17px;
+}
+
+.title{
+    font-size:21px;
+    line-height:24px;
+    margin-bottom:13px;
+}
+
+.chart{
+    height:205px;
+    position:relative;
+    background:#f8f9fb;
+    border-radius:7px;
+    overflow:hidden;
+}
+
+.legend{
+    height:29px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    color:#555;
+    font-size:10px;
+}
+
+.legend span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.income-color,
+.expense-color{
+    width:35px;
+    height:10px;
+    display:block;
+}
+
+.income-color{
+    background:#176c32;
+}
+
+.expense-color{
+    background:#a61b1b;
+}
+
+.graph{
+    position:absolute;
+    top:29px;
+    left:30px;
+    right:0;
+    bottom:26px;
+    border-left:1px solid #c3c6ca;
+    border-bottom:1px solid #c3c6ca;
+    background:repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 15px,
+        #d9dde1 16px
+    );
+}
+
+.chart-text{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:4px;
+    text-align:center;
+    color:#666;
+    font-size:10px;
+}
+
+#cashFlowChart{
+    width:100%;
+    height:100%;
+}
+
+/* preferences */
+
+.preferences{
+    height:165px;
+    background:#fff;
+    border:1px solid #dde2e7;
+    border-radius:10px;
+    padding:17px;
+}
+
+.preferences h2{
+    font-size:21px;
+    margin-bottom:20px;
+}
+
+.dark-row{
+    height:42px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:1px solid #e5e7eb;
+    font-size:13px;
+    font-weight:600;
+}
+
+.toggle{
+    width:40px;
+    height:22px;
+    padding:3px;
+    background:#cfd1d4;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.toggle div{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff;
+}
+
+.reset-btn{
+    width:100%;
+    height:30px;
+    margin-top:11px;
+    border:1px solid #ffc5c5;
+    border-radius:6px;
+    background:#fff6f6;
+    color:#a60000;
+    font-size:11px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* transactions */
+
+.transactions{
+    width:66%;
+    min-height:165px;
+    background:#fff;
+    border:1px solid #dde2e7;
+    border-radius:10px;
+    padding:16px 17px;
+}
+
+.transactions h2{
+    font-size:21px;
+    margin-bottom:13px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.search{
+    height:34px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:0 11px;
+    background:#f7f8fa;
+    border-radius:7px;
+}
+
+.search svg{
+    width:15px;
+    height:15px;
+}
+
+.search input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:12px;
+}
+
+#transactionFilter{
+    height:34px;
+    padding:0 10px;
+    border:1px solid #dde2e7;
+    border-radius:7px;
+    background:#f7f8fa;
+    outline:none;
+    font-size:12px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    height:26px;
+    padding:0 8px;
+    text-align:left;
+    border-bottom:1px solid #dde2e7;
+    color:#475569;
+    font-size:10px;
+}
+
+td{
+    padding:10px 8px;
+    border-bottom:1px solid #edf0f2;
+    font-size:11px;
+}
+
+/* smaller screens */
+
+@media(max-width:1050px){
+    .sidebar{
+        width:190px;
+    }
+
+    .page{
+        margin-left:190px;
+    }
+
+    .main{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .cards{
+        gap:10px;
+    }
+
+    .middle{
+        gap:12px;
+    }
+}
+
+.modal-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.35);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.transaction-modal{
+    width:360px;
+    background:white;
+    color:#111;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:17px;
+}
+
+.modal-header h2{
+    font-size:19px;
+}
+
+.close-modal{
+    border:none;
+    background:transparent;
+    color:#111;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.modal-group{
+    margin-bottom:12px;
+}
+
+.modal-group label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+.modal-group input,
+.modal-group select{
+    width:100%;
+    height:35px;
+    padding:0 10px;
+    background:white;
+    color:#111;
+    border:1px solid #d1d5db;
+    border-radius:5px;
+    outline:none;
+    font-size:13px;
+}
+
+.modal-group input::placeholder{
+    color:#9ca3af;
+}
+
+.amount-date{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.submit-transaction{
+    width:100%;
+    height:35px;
+    margin-top:8px;
+    border:none;
+    border-radius:5px;
+    background:#111827;
+    color:white;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.edit-btn{
+    border:none;
+    background:transparent;
+    color:blue;
+    font-size:18px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.delete-btn{
+    border:none;
+    background:transparent;
+    color:red;
+    font-size:17px;
+    cursor:pointer;
+}
+
+body.dark-mode{
+    background:#0f172a;
+    color:#f8fafc;
+}
+
+body.dark-mode .page,
+body.dark-mode .main{
+    background:#0f172a;
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .topbar{
+    background:#1e293b;
+    color:#f8fafc;
+}
+
+body.dark-mode .card,
+body.dark-mode .chart-card,
+body.dark-mode .preferences,
+body.dark-mode .transactions{
+    background:#1e293b;
+    color:#f8fafc;
+    border-color:#334155;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode p,
+body.dark-mode th,
+body.dark-mode td,
+body.dark-mode label{
+    color:#f8fafc;
+}
+
+body.dark-mode input,
+body.dark-mode select{
+    background:#0f172a;
+    color:#f8fafc;
+    border:1px solid #334155;
+}
+
+body.dark-mode table{
+    color:#f8fafc;
+}
+
+.toggle{
+    width:48px;
+    height:26px;
+    background:#cbd5e1;
+    border-radius:20px;
+    padding:3px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.toggle div{
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:50%;
+    transition:0.3s;
+}
+
+
+body.dark-mode .toggle{
+    background:#3b82f6;
+}
+
+body.dark-mode .toggle div{
+    transform:translateX(22px);
+}
+
+/* DARK MODE - TRANSACTION MODAL */
+
+body.dark-mode .transaction-modal{
+    background:#1e293b;
+    color:#f8fafc;
+}
+
+body.dark-mode .modal-header h2{
+    color:#f8fafc;
+}
+
+body.dark-mode .close-modal{
+    color:#cbd5e1;
+}
+
+body.dark-mode .modal-group label{
+    color:#f8fafc;
+}
+
+body.dark-mode .modal-group input,
+body.dark-mode .modal-group select{
+    background:#0f172a;
+    color:#f8fafc;
+    border:1px solid #475569;
+}
+
+body.dark-mode .modal-group input::placeholder{
+    color:#94a3b8;
+}
+
+body.dark-mode .submit-transaction{
+    background:#f8fafc;
+    color:#111827;
+}
+
+/* SETTINGS PAGE */
+
+#settingsSection {
+    display: none;
+    width: 100%;
+}
+
+.settings-heading {
+    margin-bottom: 25px;
+}
+
+.settings-heading h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.settings-heading p {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+/* PROFILE CARD */
+
+.settings-card {
+    background: #ffffff;
+    border: 1px solid #dde2e7;
+    border-radius: 10px;
+    padding: 25px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.settings-card h2 {
+    font-size: 21px;
+    margin-bottom: 24px;
+    color: #111827;
+}
+
+/* NAME AND CURRENCY */
+
+.settings-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.settings-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 9px;
+}
+
+.settings-field input,
+.settings-field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #111827;
+    font-size: 13px;
+    outline: none;
+}
+
+.settings-field input:focus,
+.settings-field select:focus {
+    border-color: #3b82f6;
+}
+
+/* SAVE BUTTON */
+
+.settings-save-btn {
+    margin-top: 35px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 7px;
+    background: #111827;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.settings-save-btn:hover {
+    background: #374151;
+}
+
+/* DARK MODE */
+
+body.dark-mode .settings-heading h1,
+body.dark-mode .settings-card h2,
+body.dark-mode .settings-field label {
+    color: #f8fafc;
+}
+
+body.dark-mode .settings-heading p {
+    color: #94a3b8;
+}
+
+body.dark-mode .settings-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .settings-field input,
+body.dark-mode .settings-field select {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .settings-save-btn {
+    background: #3b82f6;
+}
+
+@media (max-width: 700px) {
+    .settings-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+    
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 24 24">
+            <path fill="#111827" d="M12 2 2 7l10 5 10-5-10-5Zm-10 9 10 5 10-5v4l-10 5-10-5v-4Zm0 6 10 5 10-5v3l-10 5-10-5v-3Z"/>
+        </svg>
+        <div>
+            <h2>FinTrack Pro</h2>
+            <p>Enterprise Finance</p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <button class="active" id="dashboardNav">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 3h18v18H3V3Zm3 3v5h5V6H6Zm7 0v5h5V6h-5ZM6 13v5h5v-5H6Zm7 0v5h5v-5h-5Z"/>
+            </svg>
+            Dashboard
+        </button>
+
+        <button id="settingsNav">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19.4 13a7 7 0 0 0 0-2l2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L15 3h-4l-.4 3.1a7 7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a7 7 0 0 0 1.7 1L11 21h4l.4-3.1a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2.1-1.5ZM13 15.5A3.5 3.5 0 1 1 13 8a3.5 3.5 0 0 1 0 7.5Z"/>
+            </svg>
+            Settings
+        </button>
+    </div>
+
+    <button class="add-btn" id="addTransactionBtn">＋ Add Transaction</button>
+</aside>
+
+<div class="page">
+    <header class="topbar">
+        <div class="top-user">
+            <span id="usernameDisplay"></span>
+            <button class="logout-btn" id="logoutBtn">↪ &nbsp; Logout</button>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section id="dashboardSection">
+        <div class="heading">
+            <h1>Financial Overview</h1>
+            <p>Real-time tracking application</p>
+        </div>
+
+        <section class="cards">
+            <div class="card">
+                <div class="card-icon blue">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 2 2 7v2h20V7L12 2ZM4 11v7H2v2h20v-2h-2v-7h-2v7h-3v-7h-2v7h-2v-7H9v7H6v-7H4Z"/>
+                    </svg>
+                </div>
+                <p>Current Balance</p>
+                <h2 id="currentBalance">$0.00</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-icon green">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-width="2.2" d="m4 15 5-5 4 4 7-8m-5 0h5v5"/>
+                    </svg>
+                </div>
+                <p>Total Income</p>
+                <h2 id="totalIncome">$0.00</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-icon red">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-width="2.2" d="m4 9 5 5 4-4 7 8m-5 0h5v-5"/>
+                    </svg>
+                </div>
+                <p>Total Expense</p>
+                <h2 id="totalExpense">$0.00</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-icon blue">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 4a4 4 0 0 0-4 4H6v3H4v4h2v3h2a4 4 0 0 0 8 0h2v-3h2v-4h-2V8h-2a4 4 0 0 0-4-4Z"/>
+                    </svg>
+                </div>
+                <p>Total Transactions</p>
+                <h2 id="totalTransactions">0</h2>
+            </div>
+        </section>
+
+        <section class="middle">
+            <div class="chart-card">
+                <h2 class="title">Cash Flow Analysis</h2>
+                <div class="chart">
+                    <div class="legend">
+                        <span><i class="income-color"></i>Income</span>
+                        <span><i class="expense-color"></i>Expenses</span>
+                    </div>
+                    <div class="graph"></div>
+                    <div class="chart-text">Income vs Expenses</div>
+                    <canvas id="cashFlowChart"></canvas>
+                </div>
+            </div>
+
+            <div class="preferences">
+                <h2>Preferences</h2>
+                <div class="dark-row">
+                    <span>Dark Mode</span>
+                    <div class="toggle" id="darkModeToggle"><div></div></div>
+                </div>
+                <button class="reset-btn" id="resetBtn">▣ Reset All Data</button>
+            </div>
+        </section>
+
+        <section class="transactions">
+            <h2>All Transactions</h2>
+
+            <div class="filters">
+                <div class="search">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="10" cy="10" r="6" fill="none" stroke="#111" stroke-width="2"/>
+                        <path d="m15 15 5 5" stroke="#111" stroke-width="2"/>
+                    </svg>
+                    <input type="text" id="transactionSearch" placeholder="Search transactions...">
+                </div>
+
+                <select id="transactionFilter">
+                    <option value="all">All Types</option>
+                    <option value="income">Income Only</option>
+                    <option value="expense">Expense Only</option>
+                </select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>DESCRIPTION</th>
+                        <th>CATEGORY</th>
+                        <th>AMOUNT</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionBody"></tbody>
+            </table>
+        </section>
+        </section>
+
+        <section id="settingsSection">
+
+
+
+                <div class="settings-heading">
+
+                    <h1>Settings</h1>
+
+                    <p>
+                        Manage your account profile and app formatting.
+                    </p>
+
+                </div>
+
+
+
+                <div class="settings-card">
+
+                    <h2>Profile Details</h2>
+
+
+                    <div class="settings-fields">
+
+                        <div class="settings-field">
+
+                            <label for="profileName">
+                                Full Name
+                            </label>
+
+                            <input required
+                                type="text"
+                                id="profileName"
+                                placeholder="Enter your full name"
+                            >
+
+                        </div>
+
+
+
+                        <div class="settings-field">
+
+                            <label for="primaryCurrency">
+                                Primary Currency
+                            </label>
+
+                            <select id="primaryCurrency">
+
+                                <option value="USD">USD ($)</option>
+
+                                <option value="EUR">EUR (€)</option>
+
+                                <option value="GBP">GBP (£)</option>
+
+                                <option value="INR">INR (₹)</option>
+
+                                <option value="JPY">JPY (¥)</option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                    <button
+                        id="saveSettingsBtn"
+                        class="settings-save-btn"
+                    >
+                        Save Changes
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+    </main>
+</div>
+
+
+<div class="modal-overlay" id="transactionModal">
+
+    <div class="transaction-modal">
+
+        <div class="modal-header">
+            <h2>Add Transaction</h2>
+            <button class="close-modal" id="closeModal">×</button>
+        </div>
+
+        <form id="transactionForm">
+
+            <div class="modal-group">
+                <label>Type</label>
+
+                <select id="type">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+            </div>
+
+            <div class="modal-group">
+                <label>Description</label>
+
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="e.g. Amazon, Salary, Coffee"
+                >
+            </div>
+
+            <div class="amount-date">
+
+                <div class="modal-group">
+                    <label>Amount</label>
+                    <input type="number" id="amount">
+                </div>
+
+                <div class="modal-group">
+                    <label>Date</label>
+                    <input type="date" id="date">
+                </div>
+
+            </div>
+
+            <div class="modal-group">
+                <label>Category</label>
+
+                <select id="category">
+                    <option value="">Select a category</option>
+                    <option value="salary">Salary</option>
+                    <option value="food">Food</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="transport">Transport</option>
+                    <option value="bills">Bills</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-transaction">
+                Save Transaction
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

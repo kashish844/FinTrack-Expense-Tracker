@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinTrack Pro | Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f7f6;
+    font-family: Inter, sans-serif;
+}
+
+.login-container {
+    width: 330px;
+    background: white;
+    padding: 28px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.logo {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #1261b9;
+}
+
+.login-btn {
+    width: 100%;
+    height: 36px;
+    border: none;
+    border-radius: 5px;
+    background: #1261b9;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-footer {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 14px;
+}
+
+.login-footer a {
+    color: #005bbb;
+    text-decoration: none;
+}
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">
+            Welcome Back
+        </div>
+
+        <p class="subtitle">
+          Login to Fintrack Pro
+        </p>
+
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input type="text" id="username" placeholder="Enter your username" required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="login-footer">
+            Don't have an account? <a href="register.html">Register here</a>
+        </p>
+
+    </div>
+
+</body>
+<script src="index.js"></script>
+</html>
