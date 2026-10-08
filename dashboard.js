@@ -315,7 +315,7 @@ search.addEventListener('input',()=>{
     render();
 })
 
-transactionFilter.addEventListener('change',(e)=>{
+transactionFilter.addEventListener('change',()=>{
     newVal = transactionFilter.value;
     render();
 })

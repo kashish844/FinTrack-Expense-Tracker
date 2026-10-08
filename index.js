@@ -7,8 +7,10 @@ form.addEventListener('submit',(e)=>{
     if(username.value.trim()==="" || password.value.trim()==="") return;
     let data = localStorage.getItem("user");
     let parse = JSON.parse(data);
+
+    
     if(username.value === parse.username && password.value === parse.password){
-        window.location.href = "dashboard.html";
+        window.location.href = "Dashboard.html";
     }
     else{
         alert("Invalid Username or Password");
